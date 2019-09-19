@@ -30,8 +30,6 @@
     name: 'login',
     data() {
       return {
-        file:[],
-        dialogVisible: false,
         loginForm: {
           username: 'admin',
           password: '123456'
@@ -51,8 +49,7 @@
             this.$store.dispatch('Login', this.loginForm).then(data => {
               this.loading = false
               if ("success" === data.result) {
-                alert("登录成功！");
-                //this.$router.push({path: '/'})
+                this.$router.push({path: '/'})
               } else {
                 this.$message.error("账号/密码错误");
               }

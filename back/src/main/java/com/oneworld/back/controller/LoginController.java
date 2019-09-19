@@ -25,6 +25,21 @@ public class LoginController {
         CommonUtil.hasAllRequired(requestJson, "username,password");
         return loginService.authLogin(requestJson);
     }
+    /**
+     * 查询当前登录用户的信息
+     */
+    @PostMapping("/getInfo")
+    public JSONObject getInfo() {
+        return loginService.getInfo();
+    }
+
+    /**
+     * 登出
+     */
+    @PostMapping("/logout")
+    public JSONObject logout() {
+        return loginService.logout();
+    }
 
 
 }

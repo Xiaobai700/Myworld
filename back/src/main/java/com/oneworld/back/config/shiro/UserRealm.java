@@ -1,9 +1,13 @@
 package com.oneworld.back.config.shiro;
 
+import com.alibaba.fastjson.JSONObject;
 import com.oneworld.back.dao.SysPermissionDao;
 import com.oneworld.back.dao.SysUserDao;
 import com.oneworld.back.entity.SysUserEntity;
+import com.oneworld.back.service.LoginService;
+import com.oneworld.back.utils.constants.Constants;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -26,6 +30,8 @@ public class UserRealm extends AuthorizingRealm {
     private SysPermissionDao sysPermissionDao;
     @Autowired
     private SysUserDao sysUserDao;
+    @Autowired
+    private LoginService loginService;
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
@@ -57,11 +63,18 @@ public class UserRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken)authenticationToken;
         String userName = token.getUsername();
-        SysUserEntity userEntity = sysUserDao.selectUserByUserName(userName);
-        if(userEntity == null){
+        String password = new String(token.getPassword());
+        JSONObject user = loginService.getUser(userName, password);
+        if(user == null){
             throw new UnknownAccountException("账号或密码不正确");
         }
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userEntity, userEntity.getPassword(), getName());
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.getString("username"),
+                user.getString("password"),
+                //ByteSource.Util.bytes("salt"), salt=username+salt,采用明文访问时，不需要此句
+                getName());
+        //session中不需要保存密码
+        //将用户信息放入session中
+        SecurityUtils.getSubject().getSession().setAttribute(Constants.SESSION_USER_INFO, user);
         return info;
     }
 }
