@@ -59,6 +59,7 @@
       <el-table-column align="center" label="管理" width="200" v-if="hasPerm('article:update')">
         <template slot-scope="scope">
           <el-button type="primary" icon="edit" @click="showUpdate(scope.$index)">修改</el-button>
+          <el-button type="danger" icon="el-icon-delete" @click="deleteArticle(scope.$index)" circle></el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -286,6 +287,32 @@
         this.tempArticle.content = this.list[$index].content;
         this.dialogStatus = "update"
         this.dialogFormVisible = true
+      },
+      deleteArticle: function ($index) {
+        var _this = this;
+        this.$confirm('确定删除这篇文章?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(function() {
+          _this.tempArticle.id = _this.list[$index].id;
+          _this.api({
+            url: "/article/deleteArticle",
+            method: "post",
+            data: _this.tempArticle
+          }).then(() => {
+            _this.$message({
+              type: 'success',
+              message: "删除成功!"
+            });
+            _this.getList();
+          }).catch(function () {
+            _this.$message({
+              type: 'error',
+              message: "删除接口出错！"
+            })
+          });
+        })
       },
       createArticle() {
         //保存新文章

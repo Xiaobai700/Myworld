@@ -64,6 +64,15 @@ public class ArticleController {
 	}
 
 	/**
+	 * 删除文章
+	 * */
+	@PostMapping("/deleteArticle")
+	public JSONObject deleteArticle(@RequestBody JSONObject requestJson) {
+		CommonUtil.hasAllRequired(requestJson, "id");
+		return articleService.deleteArticle(requestJson);
+	}
+
+	/**
 	 * 导入
 	 * */
 	@RequestMapping("/importExcel")

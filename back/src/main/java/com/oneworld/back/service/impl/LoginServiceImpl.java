@@ -89,6 +89,7 @@ public class LoginServiceImpl implements LoginService {
             Subject currentUser = SecurityUtils.getSubject();
             currentUser.logout();
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return CommonUtil.successJson();
     }

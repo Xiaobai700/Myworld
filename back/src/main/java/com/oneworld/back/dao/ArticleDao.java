@@ -27,6 +27,11 @@ public interface ArticleDao {
 	int updateArticle(JSONObject jsonObject);
 
 	/**
+	 * 删除文章
+	 * */
+	int deleteArticle(JSONObject jsonObject);
+
+	/**
 	 * 查询所有文章
 	 * */
 	List<JSONObject> selectAll();

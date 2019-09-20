@@ -52,6 +52,12 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
+	public JSONObject deleteArticle(JSONObject jsonObject) {
+		articleDao.deleteArticle(jsonObject);
+		return CommonUtil.successJson();
+	}
+
+	@Override
 	public List<JSONObject> selectAll() {
 		return articleDao.selectAll();
 	}

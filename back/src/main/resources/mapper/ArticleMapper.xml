@@ -34,6 +34,10 @@
         WHERE id = #{id}
     </update>
 
+    <delete id="deleteArticle" parameterType="com.alibaba.fastjson.JSONObject">
+        delete from article where id = #{id}
+    </delete>
+
     <select id="selectAll" resultType="com.alibaba.fastjson.JSONObject">
         select * from article
     </select>
