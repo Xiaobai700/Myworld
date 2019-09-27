@@ -37,7 +37,7 @@
     border: 0;
   }
   .el-container{
-     height: 100vh;
+     height: 93.5vh;
   }
   .el-header{
     background-color: #4868AC;
@@ -55,9 +55,13 @@
     background-color: #E9EEF3;
     color: #333;
     text-align: center;
+    margin: 0;
+    padding: 0;
+    border: 0;
   }
   .main-container{
-    max-width: 800px;
+   // max-width: 800px;
+    height: 100%;
     margin: 0 auto;
   }
   body > .el-container {

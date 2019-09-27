@@ -37,7 +37,7 @@ public class ArticleController {
 	/**
 	 * 查询文章列表
 	 */
-	@RequiresPermissions("article:list")
+	//@RequiresPermissions("article:list")
 	@GetMapping("/listArticle")
 	public JSONObject listArticle(HttpServletRequest request) {
 		return articleService.listArticle(CommonUtil.request2Json(request));

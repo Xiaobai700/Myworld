@@ -5,21 +5,21 @@
       class="el-menu-vertical-demo">
       <el-submenu index="1">
         <template slot="title">
-          <i class="el-icon-location"></i>
-          <span>订单</span>
+          <i class="el-icon-notebook-1"></i>
+          <span>文章</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item :route="{name: 'page1'}" index="1-1">page1</el-menu-item>
+          <el-menu-item :route="{name: 'page1'}" index="1-1">文章列表</el-menu-item>
           <el-menu-item :route="{name: 'page2'}" index="1-2">page2</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-menu-item :route="{name: 'page3'}" index="2">
-        <i class="el-icon-menu"></i>
-        <span slot="title">活动</span>
+        <i class="el-icon-umbrella"></i>
+        <span slot="title">测试页面1</span>
       </el-menu-item>
       <el-menu-item :route="{name: 'page4'}" index="3">
-        <i class="el-icon-document"></i>
-        <span slot="title">用户</span>
+        <i class="el-icon-basketball"></i>
+        <span slot="title">测试页面2</span>
       </el-menu-item>
     </el-menu>
   </div>

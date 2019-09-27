@@ -10,6 +10,10 @@ import locale from 'element-ui/lib/locale/lang/zh-CN'
 Vue.config.productionTip = false
 Vue.use(ElementUI,{locale})
 
+import axios from 'axios';
+Vue.prototype.$axios = axios;
+axios.defaults.baseURL = '/api'  //解决axios跨域问题
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
