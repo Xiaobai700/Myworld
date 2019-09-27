@@ -18,15 +18,16 @@ export default new Router({
       component: Login
     },
     {
-      path:'/hello',
-      name:'hello',
-      component:HelloWorld
-    },
-    {
       path: '/index',
       name: 'Index',
       component: Index,
+      redirect:'/hello',
       children: [
+        {
+          path: '/hello',
+          name: 'hello',
+          component: HelloWorld
+        },
         {
           path: '/page1',
           name: 'page1',
