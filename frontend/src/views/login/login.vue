@@ -1,7 +1,7 @@
 <template>
   <el-form ref="form" :model="form" :rules="loginRules" label-width="80px" class="login-form">
     <el-form-item label="账号">
-      <el-input v-model="form.account" placeholder="请输入内容"></el-input>
+      <el-input v-model="form.username" placeholder="请输入内容"></el-input>
     </el-form-item>
     <el-form-item label="密码">
       <el-input placeholder="请输入密码" v-model="form.password" show-password></el-input>
@@ -13,16 +13,17 @@
 </template>
 
 <script>
+    import axios from 'axios';
     export default {
         name: "login",
         data(){
             return{
                 form: {
-                    account:'',
+                    username:'',
                     password:''
                 },
                 loginRules: {
-                    account: [{required: true, trigger: 'blur', message: "请输入账号"}],
+                    username: [{required: true, trigger: 'blur', message: "请输入账号"}],
                     password: [{required: true, trigger: 'blur', message: "请输入密码"}]
                 },
             }
@@ -31,8 +32,18 @@
             onSubmit() {
                 this.$refs.form.validate(valid => {
                     if(valid){
-                        this.$router.push({path:'/index'})
-                    }else {
+                        axios.post('/login/auth',this.form).then(data =>{
+                            console.log(data.data)
+                            if(data.data.code === '100'){
+                                this.$router.push({path:'/index'})
+                            }else{
+                                const h = this.$createElement;
+                                this.$notify({
+                                    title: '消息',
+                                    message: h('i', { style: 'color: teal'}, '登录失败！')
+                                });
+                            }
+                        })
                     }
                 })
             }
