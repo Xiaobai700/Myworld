@@ -33,7 +33,6 @@
                 this.$refs.form.validate(valid => {
                     if(valid){
                         axios.post('/login/auth',this.form).then(data =>{
-                            console.log(data.data)
                             if(data.data.code === '100'){
                                 this.$router.push({path:'/index'})
                             }else{

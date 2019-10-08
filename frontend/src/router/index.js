@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import Login from '../views/login/login'
-import Index from '../views/index/index'
-import page1 from '../views/other/page1'
-import page2 from '../views/other/page2'
-import page3 from '../views/other/page3'
-import page4 from '../views/other/page4'
+import Login from '@/views/login/login'
+import Index from '@/views/index/index'
+import page1 from '@/views/other/page1'
+import page2 from '@/views/other/page2'
+import page3 from '@/views/other/page3'
+import page4 from '@/views/other/page4'
 
 Vue.use(Router)
 
