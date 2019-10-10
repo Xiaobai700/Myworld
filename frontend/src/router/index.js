@@ -54,7 +54,8 @@ export const constantRouterMap = [
   {
     path: '/index',
     component: Index,
-    redirect: '/index/page3',
+    redirect: '/page3',
+    meta:{title:'测试'},
     name: '测试',
     children: [
       {
