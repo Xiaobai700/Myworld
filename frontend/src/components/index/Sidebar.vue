@@ -22,7 +22,7 @@
         <el-menu-item-group>
           <el-menu-item :route="{name: 'page3'}" index="2-1">
             <i class="el-icon-umbrella"></i>
-            <span slot="title">测试页面1</span>
+            <span slot="title">transition例子</span>
           </el-menu-item>
           <el-menu-item :route="{name: 'page4'}" index="2-2">
             <i class="el-icon-basketball"></i>

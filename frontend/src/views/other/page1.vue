@@ -1,7 +1,6 @@
 <template>
   <div class="app-container">
     <div class="table">
-
       <el-table
         ref="multipleTable"
         :data="list"

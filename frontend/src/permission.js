@@ -1,11 +1,10 @@
 import router from './router'
 import store from './store'
 import {getToken} from '@/utils/auth' // 验权
-const whiteList = ['/', '/404'] //白名单,不需要登录的路由
+const whiteList = ['/', '/404'];//白名单,不需要登录的路由
 router.beforeEach((to, from, next) => {
   if (getToken()) {
     //如果已经登录
-
     if (to.path === '/') {
       next({path: '/index'})
     } else if (!store.getters.role) {
@@ -23,6 +22,6 @@ router.beforeEach((to, from, next) => {
     store.commit('RESET_USER')
     next('/')
   }
-})
+});
 router.afterEach(() => {
-})
+});

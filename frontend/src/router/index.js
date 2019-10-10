@@ -62,7 +62,7 @@ export const constantRouterMap = [
         path: '/page3',
         name: 'page3',
         component: page3,
-        meta:{title:'测试页面1'},
+        meta:{title:'transition例子'},
         menu:'page3'
       },
       {
