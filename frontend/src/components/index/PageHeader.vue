@@ -24,7 +24,9 @@
         methods:{
             logout(){
                 console.log("退出");
-                this.$router.push({path:'/'})
+                this.$store.dispatch('LogOut').then(data =>{
+                    this.$router.push({path: '/'})
+                })
             }
         }
     }

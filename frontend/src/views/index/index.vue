@@ -8,6 +8,9 @@
           <sidebar></sidebar>
         </el-aside>
         <el-container>
+          <el-header style="height: 38px;background-color: rgb(245,245,245)">
+            <navbar></navbar>
+          </el-header>
           <el-main>
             <app-main></app-main>
           </el-main>
@@ -20,13 +23,20 @@
     import PageHeader from '../../components/index/PageHeader'
     import Sidebar from '../../components/index/Sidebar'
     import AppMain from '../../components/index/AppMain'
+    import Navbar from "../../components/index/Navbar";
     export default {
         name: 'index',
         components: {
+            Navbar,
             PageHeader,
             Sidebar,
             AppMain
+        },
+      computed: {
+        sidebar() {
+          return this.$store.state.app.sidebar
         }
+      }
     }
 </script>
 
@@ -46,8 +56,8 @@
     line-height: 60px;
   }
   .el-aside {
-    background-color: #304156;
-    color: #333;
+    background-color: rgb(84,92,100);
+    color: white;
     text-align: center;
     line-height: 200px;
   }
@@ -60,7 +70,7 @@
     border: 0;
   }
   .main-container{
-   // max-width: 800px;
+   //max-width: 800px;
     height: 100%;
     margin: 0 auto;
   }

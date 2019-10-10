@@ -13,14 +13,24 @@
           <el-menu-item :route="{name: 'page2'}" index="1-2">page2</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
-      <el-menu-item :route="{name: 'page3'}" index="2">
-        <i class="el-icon-umbrella"></i>
-        <span slot="title">测试页面1</span>
-      </el-menu-item>
-      <el-menu-item :route="{name: 'page4'}" index="3">
-        <i class="el-icon-basketball"></i>
-        <span slot="title">测试页面2</span>
-      </el-menu-item>
+
+      <el-submenu index="2">
+        <template slot="title">
+          <i class="el-icon-umbrella"></i>
+          <span>测试</span>
+        </template>
+        <el-menu-item-group>
+          <el-menu-item :route="{name: 'page3'}" index="2-1">
+            <i class="el-icon-umbrella"></i>
+            <span slot="title">测试页面1</span>
+          </el-menu-item>
+          <el-menu-item :route="{name: 'page4'}" index="2-2">
+            <i class="el-icon-basketball"></i>
+            <span slot="title">测试页面2</span>
+          </el-menu-item>
+        </el-menu-item-group>
+      </el-submenu>
+
     </el-menu>
   </div>
 </template>

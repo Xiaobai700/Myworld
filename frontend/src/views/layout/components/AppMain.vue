@@ -1,8 +1,10 @@
 <template>
-  <transition name="move" mode="out-in">
-    <router-view class="main-container">
-    </router-view>
-  </transition>
+  <section class="app-main">
+    <transition name="fade" mode="out-in">
+      <!-- <router-view :key="key"></router-view> -->
+      <router-view></router-view>
+    </transition>
+  </section>
 </template>
 
 <script>
