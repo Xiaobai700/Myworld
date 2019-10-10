@@ -62,7 +62,7 @@
     line-height: 200px;
   }
   .el-main {
-    background-color: #E9EEF3;
+    background-color: white;
     color: #333;
     text-align: center;
     margin: 0;

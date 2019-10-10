@@ -107,7 +107,7 @@
         listLoading: false,//数据加载等待动画
         listQuery: {
           pageNum: 1,//页码
-          pageRow: 50,//每页条数
+          pageRow: 10,//每页条数
           name: ''
         },
         dialogStatus: 'create',
@@ -263,13 +263,19 @@
       },
       handleSizeChange(val) {
         //改变每页数量
-        this.listQuery.pageRow = val
-        this.handleFilter();
+        this.listQuery.pageRow = val;
+        this.handleFilter(val);
       },
       handleCurrentChange(val) {
         //改变页码
-        this.listQuery.pageNum = val
+        this.listQuery.pageNum = val;
         this.getList();
+      },
+      handleFilter(val) {
+        //查询事件
+        this.listQuery.pageNum = 1;
+        this.listQuery.pageRow = val;
+        this.getList()
       },
       getIndex($index) {
         //表格序号
@@ -278,14 +284,14 @@
       showCreate() {
         //显示新增对话框
         this.tempArticle.content = "";
-        this.dialogStatus = "create"
+        this.dialogStatus = "create";
         this.dialogFormVisible = true
       },
       showUpdate($index) {
         //显示修改对话框
         this.tempArticle.id = this.list[$index].id;
         this.tempArticle.content = this.list[$index].content;
-        this.dialogStatus = "update"
+        this.dialogStatus = "update";
         this.dialogFormVisible = true
       },
       deleteArticle: function ($index) {

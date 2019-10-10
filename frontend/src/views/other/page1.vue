@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <div class="table">
+    <!--<div class="table">-->
       <el-table
         ref="multipleTable"
         :data="list"
@@ -10,6 +10,11 @@
         <el-table-column
           type="selection"
           width="55">
+        </el-table-column>
+        <el-table-column align="center" label="序号" width="80">
+          <template slot-scope="scope">
+            <span v-text="getIndex(scope.$index)"> </span>
+          </template>
         </el-table-column>
         <el-table-column
           prop="content"
@@ -22,19 +27,17 @@
           <template slot-scope="scope">{{scope.row.createTime}}</template>
         </el-table-column>
       </el-table>
+       <el-pagination
+         @size-change="handleSizeChange"
+         @current-change="handleCurrentChange"
+         :current-page="listQuery.pageNum"
+         :page-sizes="[10, 20, 30, 40]"
+         :page-size='listQuery.pageRow'
+         layout="total, sizes, prev, pager, next, jumper"
+         :total=this.totalCount>
+       </el-pagination>
     </div>
-    <div class="block">
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="currentPage4"
-        :page-sizes="[10, 20, 30, 40]"
-        :page-size="100"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total=this.totalCount>
-      </el-pagination>
-    </div>
-  </div>
+ <!-- </div>-->
 
 </template>
 
@@ -44,16 +47,16 @@
         name: "page1",
         data() {
             return {
-                currentPage1: 5,
-                currentPage2: 5,
-                currentPage3: 5,
+                currentPage1: 1,
+                currentPage2: 2,
+                currentPage3: 3,
                 currentPage4: 4,
                 list: [],
                 totalCount: 0,
                 multipleSelection: [],
                 listQuery: {
                     pageNum: 1,//页码
-                    pageRow: 50,//每页条数
+                    pageRow: 10,//每页条数
                     name: ''
                 }
             }
@@ -74,21 +77,37 @@
             getList() {
                 //查询列表
                // this.listLoading = true;
-                axios.get('/article/listArticle',this.listQuery).then(data =>{
+               /* axios.get('/article/listArticle',this.listQuery).then(data =>{
                     console.log(data.data.info.list);
                     this.list = data.data.info.list;
                     this.totalCount = data.data.info.totalCount;
-                })
+                })*/
+              this.api({
+                url: "/article/listArticle",
+                method: "get",
+                params: this.listQuery
+              }).then(data => {
+                this.list = data.list;
+                this.totalCount = data.totalCount;
+              })
             },
             handleSelectionChange(val) {
                 this.multipleSelection = val;
             },
             handleSizeChange(val) {
-                console.log(`每页 ${val} 条`);
+              this.listQuery.pageRow = val;
+              this.handleFilter(val);
             },
             handleCurrentChange(val) {
-                console.log(`当前页: ${val}`);
+              this.listQuery.pageNum = val;
+                this.getList();
             },
+          handleFilter(val) {
+            //查询事件
+            this.listQuery.pageNum = 1;
+            this.listQuery.pageRow = val;
+            this.getList()
+          },
             getIndex($index) {
                 //表格序号
                 return (this.listQuery.pageNum - 1) * this.listQuery.pageRow + $index + 1
