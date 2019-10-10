@@ -41,5 +41,10 @@ public class LoginController {
         return loginService.logout();
     }
 
+    @RequestMapping("/test")
+    public String test() {
+        return "hihihihi";
+    }
+
 
 }

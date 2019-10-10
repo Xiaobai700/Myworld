@@ -4,12 +4,6 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Component;
 
-/**
- * Shiro权限标签
- * @author jinfuming
- * @Time：2018年7月12日 上午8:53:57
- * @version 1.0  
- */
 @Component
 public class ShiroTag {
 
