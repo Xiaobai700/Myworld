@@ -42,4 +42,11 @@
         select * from article
     </select>
 
+    <delete id="deleteArticles">
+        delete from article where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
 </mapper>

@@ -73,6 +73,14 @@ public class ArticleController {
 	}
 
 	/**
+	 * 批量删除文章
+	 * */
+	@PostMapping("/deleteArticles")
+	public JSONObject deleteArticles(@RequestBody Long[] deleteArr){
+		return articleService.deleteArticles(deleteArr);
+	}
+
+	/**
 	 * 导入
 	 * */
 	@RequestMapping("/importExcel")

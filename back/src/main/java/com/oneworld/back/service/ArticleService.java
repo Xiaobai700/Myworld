@@ -33,4 +33,9 @@ public interface ArticleService {
 	 * 查询所有文章
 	 * */
 	List<JSONObject> selectAll();
+
+	/**
+	 * 批量删除文章
+	 * */
+	JSONObject deleteArticles(Long[] deleteArr);
 }

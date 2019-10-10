@@ -35,4 +35,9 @@ public interface ArticleDao {
 	 * 查询所有文章
 	 * */
 	List<JSONObject> selectAll();
+
+	/**
+	 * 批量删除文章
+	 * */
+	int deleteArticles(Long[] deleteArr);
 }

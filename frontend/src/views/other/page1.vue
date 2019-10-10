@@ -1,6 +1,9 @@
 <template>
   <div class="app-container">
     <!--<div class="table">-->
+    <div style="float: left; margin-top: 5px;margin-left: 5px;">
+      <el-button type="danger" icon="el-icon-delete" @click="deleteArticles">批量删除</el-button>
+    </div>
       <el-table
         ref="multipleTable"
         :data="list"
@@ -42,7 +45,6 @@
 </template>
 
 <script>
-  import axios from 'axios';
     export default {
         name: "page1",
         data() {
@@ -75,13 +77,6 @@
                 }
             },
             getList() {
-                //查询列表
-               // this.listLoading = true;
-               /* axios.get('/article/listArticle',this.listQuery).then(data =>{
-                    console.log(data.data.info.list);
-                    this.list = data.data.info.list;
-                    this.totalCount = data.data.info.totalCount;
-                })*/
               this.api({
                 url: "/article/listArticle",
                 method: "get",
@@ -102,12 +97,55 @@
               this.listQuery.pageNum = val;
                 this.getList();
             },
-          handleFilter(val) {
+            handleFilter(val) {
             //查询事件
             this.listQuery.pageNum = 1;
             this.listQuery.pageRow = val;
             this.getList()
-          },
+            },
+            deleteArticles() {
+              let _this = this;
+              let selection = _this.$refs.multipleTable.selection;
+              let deleteArr = [];
+              let selectedNum = selection.length;
+              if(selectedNum < 1){
+                this.$message.error('请至少选中一条数据进行删除！');
+                return ""
+              }
+              for (let i = 0; i < selectedNum; i++) {
+                let id = selection[i].id;
+                deleteArr.push(id);
+              }
+              this.$confirm('确定删除选中的' + selectedNum + '条数据?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+              }).then(function() {
+                _this.api({
+                  url: "/article/deleteArticles",
+                  method: "post",
+                  data: deleteArr
+                }).then(() => {
+                  _this.$message({
+                    type: 'success',
+                    message: "删除成功!"
+                  });
+                  _this.getList();
+                }).catch(function () {
+                  _this.$message({
+                    type: 'error',
+                    message: "删除接口出错！"
+                  })
+                });
+              }).catch(function() {
+                _this.$message({
+                  type: 'info',
+                  message: '已取消删除'
+                });
+              });
+
+
+            },
             getIndex($index) {
                 //表格序号
                 return (this.listQuery.pageNum - 1) * this.listQuery.pageRow + $index + 1

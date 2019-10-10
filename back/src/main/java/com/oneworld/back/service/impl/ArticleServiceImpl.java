@@ -58,4 +58,10 @@ public class ArticleServiceImpl implements ArticleService {
 	public List<JSONObject> selectAll() {
 		return articleDao.selectAll();
 	}
+
+	@Override
+	public JSONObject deleteArticles(Long[] deleteArr) {
+		articleDao.deleteArticles(deleteArr);
+		return CommonUtil.successJson();
+	}
 }
