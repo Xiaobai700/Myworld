@@ -4,16 +4,27 @@
 <mapper namespace="com.oneworld.back.dao.MenuDao">
     <select id="getMenuList" resultType="com.alibaba.fastjson.JSONObject" parameterType="com.alibaba.fastjson.JSONObject">
         select
+        id id,
         menu_code menuCode,
         menu_name menuName,
         permission_code permissionCode,
-        permission_name permissionName
+        permission_name permissionName,
+        delete_status deleteStatus
         from
-        sys_permission;
+        sys_permission
+        where delete_status = 1;
     </select>
 
     <select id="countMenus" resultType="Integer">
         SELECT count(0)
         FROM sys_permission p
     </select>
+
+    <update id="deleteMenu">
+        update sys_permission
+        set
+        delete_status= #{delete_status}
+        where
+        id = #{id}
+    </update>
 </mapper>

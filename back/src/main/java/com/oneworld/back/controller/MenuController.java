@@ -3,10 +3,9 @@ package com.oneworld.back.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.oneworld.back.service.MenuService;
 import com.oneworld.back.utils.CommonUtil;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,10 +19,15 @@ public class MenuController {
     @Autowired
     private MenuService menuService;
 
-    //@RequiresPermissions("article:list")
+    @RequiresPermissions("menu:list")
     @GetMapping("/listMenu")
     public JSONObject listArticle(HttpServletRequest request) {
-        System.out.println(menuService.getAllMenu(CommonUtil.request2Json(request)));
         return menuService.getAllMenu(CommonUtil.request2Json(request));
+    }
+
+    //@RequiresPermissions("menu:delete")
+    @PostMapping("/deleteMenu")
+    public JSONObject deleteMenu(@RequestBody JSONObject jsonObject) {
+        return menuService.deleteMenu(jsonObject);
     }
 }

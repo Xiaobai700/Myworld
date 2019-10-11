@@ -9,4 +9,6 @@ import com.alibaba.fastjson.JSONObject;
  */
 public interface MenuService {
     JSONObject getAllMenu(JSONObject jsonObject);
+
+    JSONObject deleteMenu(JSONObject jsonObject);
 }

@@ -15,4 +15,6 @@ public interface MenuDao {
     int countMenus(JSONObject jsonObject);
 
     List<JSONObject> getMenuList(JSONObject jsonObject);
+
+    int deleteMenu(JSONObject jsonObject);
 }

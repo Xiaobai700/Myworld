@@ -17,11 +17,18 @@ import java.util.List;
 public class MenuServiceImpl implements MenuService {
     @Autowired
     private MenuDao menuDao;
+
     @Override
     public JSONObject getAllMenu(JSONObject jsonObject) {
         CommonUtil.fillPageParam(jsonObject);
         int count = menuDao.countMenus(jsonObject);
         List<JSONObject> list = menuDao.getMenuList(jsonObject);
         return CommonUtil.successPage(jsonObject, list, count);
+    }
+
+    @Override
+    public JSONObject deleteMenu(JSONObject jsonObject) {
+        menuDao.deleteMenu(jsonObject);
+        return CommonUtil.successJson();
     }
 }

@@ -15,10 +15,16 @@
           <span v-text="getIndex(scope.$index)"> </span>
         </template>
       </el-table-column>
+      <el-table-column prop="id" label="id" width="200"></el-table-column>
       <el-table-column prop="menuCode" label="菜单编码" width="200" show-overflow-tooltip></el-table-column>
       <el-table-column prop="menuName" label="菜单名称" width="200"></el-table-column>
       <el-table-column prop="permissionCode" label="权限编码" width="300"></el-table-column>
       <el-table-column prop="permissionName" label="权限名称" show-overflow-tooltip></el-table-column>
+      <el-table-column label="管理">
+        <template slot-scope="scope">
+          <el-button type="danger"  @click="removeMenu(scope.$index)">删除</el-button>
+        </template>
+      </el-table-column>
     </el-table>
     <el-pagination
       @size-change="handleSizeChange"
@@ -34,7 +40,7 @@
 
 <script>
     export default {
-      name: "menu",
+      name: "menu1",
       data(){
         return{
           totalCount:0,
@@ -52,6 +58,7 @@
             create:'新建菜单'
           },
           tempMenu: {
+            id:'',
             menuCode:'',
             menuName:'',
             permissionCode:'',
@@ -95,6 +102,27 @@
         },
         handleSelectionChange(val) {
           this.multipleSelection = val;
+        },
+        removeMenu($index){
+          let _vue = this;
+          this.$confirm('确定删除此Menu?', '提示', {
+            confirmButtonText: '确定',
+            showCancelButton: false,
+            type: 'warning'
+          }).then(() => {
+            console.log(_vue.list[$index].id);
+            let menu = _vue.list[$index];
+            menu.deleteStatus = 2;
+            _vue.api({
+              url: "/menu/deleteMenu",
+              method: "post",
+              data: menu
+            }).then(() => {
+              _vue.getList()
+            }).catch(() => {
+              _vue.$message.error("删除失败")
+            })
+          })
         }
       }
     }
