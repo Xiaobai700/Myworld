@@ -6,10 +6,10 @@
       <el-submenu index="1">
         <template slot="title">
           <i class="el-icon-notebook-1"></i>
-          <span>文章</span>
+          <span>文章管理</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item :route="{name: 'page1'}" index="1-1">文章列表</el-menu-item>
+          <el-menu-item :route="{name: 'article'}" index="1-1">文章列表</el-menu-item>
           <el-menu-item :route="{name: 'page2'}" index="1-2">page2</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
@@ -17,7 +17,7 @@
       <el-submenu index="2">
         <template slot="title">
           <i class="el-icon-umbrella"></i>
-          <span>测试</span>
+          <span>测试管理</span>
         </template>
         <el-menu-item-group>
           <el-menu-item :route="{name: 'page3'}" index="2-1">
@@ -27,6 +27,23 @@
           <el-menu-item :route="{name: 'page4'}" index="2-2">
             <i class="el-icon-basketball"></i>
             <span slot="title">测试页面2</span>
+          </el-menu-item>
+        </el-menu-item-group>
+      </el-submenu>
+
+      <el-submenu index="3">
+        <template slot="title">
+          <i class="el-icon-umbrella"></i>
+          <span>权限管理</span>
+        </template>
+        <el-menu-item-group>
+          <el-menu-item :route="{name: 'user'}" index="3-1">
+            <i class="el-icon-umbrella"></i>
+            <span slot="title">用户列表</span>
+          </el-menu-item>
+          <el-menu-item :route="{name: 'role'}" index="3-2">
+            <i class="el-icon-basketball"></i>
+            <span slot="title">角色管理</span>
           </el-menu-item>
         </el-menu-item-group>
       </el-submenu>

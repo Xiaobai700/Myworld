@@ -75,6 +75,16 @@
         , delete_status = #{deleteStatus}
         WHERE id = #{userId} and id != 10001
     </update>
+
+    <update id="deleteUsers">
+        update sys_user
+        set
+        delete_status = '2'
+        where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
     <resultMap id="roleMap" type="com.oneworld.back.utils.model.One2Many">
         <id column="roleId" property="roleId"/>
         <result column="roleName" property="roleName"/>

@@ -30,6 +30,11 @@ public interface UserService {
 	JSONObject updateUser(JSONObject jsonObject);
 
 	/**
+	 * 批量删除用户
+	 * */
+	JSONObject deleteUsers(Long[] deleteArr);
+
+	/**
 	 * 角色列表
 	 */
 	JSONObject listRole();

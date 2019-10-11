@@ -67,6 +67,12 @@ public class UserServiceImpl implements UserService {
 		return CommonUtil.successJson();
 	}
 
+	@Override
+	public JSONObject deleteUsers(Long[] deleteArr) {
+		userDao.deleteUsers(deleteArr);
+		return CommonUtil.successJson();
+	}
+
 	/**
 	 * 角色列表
 	 */

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.PublicKey;
 
 /**
  * @author: hxy
@@ -42,6 +43,12 @@ public class UserController {
 	public JSONObject updateUser(@RequestBody JSONObject requestJson) {
 		CommonUtil.hasAllRequired(requestJson, " nickname,   roleId, deleteStatus, userId");
 		return userService.updateUser(requestJson);
+	}
+
+	@RequiresPermissions("user:delete")
+	@PostMapping("/deleteUsers")
+	public JSONObject deleteUsers(@RequestBody Long[] deleteArr){
+		return userService.deleteUsers(deleteArr);
 	}
 
 	@RequiresPermissions(value = {"user:add", "user:update"}, logical = Logical.OR)

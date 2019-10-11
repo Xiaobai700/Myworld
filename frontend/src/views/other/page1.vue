@@ -143,8 +143,6 @@
                   message: '已取消删除'
                 });
               });
-
-
             },
             getIndex($index) {
                 //表格序号
