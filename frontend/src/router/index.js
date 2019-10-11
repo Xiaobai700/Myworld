@@ -92,6 +92,13 @@ export const constantRouterMap = [
         component: _import('user/user1'),
         meta:{title:'用户列表'},
         menu:'user'
+      },
+      {
+        path: '/menu',
+        name: 'menu',
+        component: _import('menu/menu'),
+        meta:{title:'菜单列表'},
+        menu:'menu'
       }
     ]
   }

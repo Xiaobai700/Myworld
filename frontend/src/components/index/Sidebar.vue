@@ -45,6 +45,10 @@
             <i class="el-icon-basketball"></i>
             <span slot="title">角色管理</span>
           </el-menu-item>
+          <el-menu-item :route="{name: 'menu'}" index="3-3">
+            <i class="el-icon-basketball"></i>
+            <span slot="title">菜单管理</span>
+          </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
 

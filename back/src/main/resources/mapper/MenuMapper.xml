@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oneworld.back.dao.MenuDao">
+    <select id="getMenuList" resultType="com.alibaba.fastjson.JSONObject" parameterType="com.alibaba.fastjson.JSONObject">
+        select
+        menu_code menuCode,
+        menu_name menuName,
+        permission_code permissionCode,
+        permission_name permissionName
+        from
+        sys_permission;
+    </select>
+
+    <select id="countMenus" resultType="Integer">
+        SELECT count(0)
+        FROM sys_permission p
+    </select>
+</mapper>
