@@ -1,6 +1,6 @@
 # Myworld
 前后端分离demo
-工作的时候偶然间使用vue+easyexcel实现了Excel表格的导入导出功能，对vue产生了兴趣，希望能进一步学习
+偶然间使用vue+easyexcel实现了Excel表格的导入导出功能，对vue产生了兴趣，希望能进一步学习
 然后自己尝试搭建一个springboot+dubbo+shiro+vue的权限管理的项目
 但是dubbo和shiro的整合一直出问题
 遂暂时放弃dubbo 只整合springboot+shiro+vue
