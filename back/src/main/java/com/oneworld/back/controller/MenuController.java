@@ -25,7 +25,7 @@ public class MenuController {
         return menuService.getAllMenu(CommonUtil.request2Json(request));
     }
 
-    //@RequiresPermissions("menu:delete")
+    @RequiresPermissions("menu:delete")
     @PostMapping("/deleteMenu")
     public JSONObject deleteMenu(@RequestBody JSONObject jsonObject) {
         return menuService.deleteMenu(jsonObject);

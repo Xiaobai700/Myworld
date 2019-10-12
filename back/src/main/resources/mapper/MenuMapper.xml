@@ -12,7 +12,8 @@
         delete_status deleteStatus
         from
         sys_permission
-        where delete_status = 1;
+        where delete_status = 1
+        LIMIT #{offSet}, #{pageRow}
     </select>
 
     <select id="countMenus" resultType="Integer">
@@ -23,7 +24,7 @@
     <update id="deleteMenu">
         update sys_permission
         set
-        delete_status= #{delete_status}
+        delete_status= #{deleteStatus}
         where
         id = #{id}
     </update>

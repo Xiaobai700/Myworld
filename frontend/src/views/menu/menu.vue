@@ -15,7 +15,6 @@
           <span v-text="getIndex(scope.$index)"> </span>
         </template>
       </el-table-column>
-      <el-table-column prop="id" label="id" width="200"></el-table-column>
       <el-table-column prop="menuCode" label="菜单编码" width="200" show-overflow-tooltip></el-table-column>
       <el-table-column prop="menuName" label="菜单名称" width="200"></el-table-column>
       <el-table-column prop="permissionCode" label="权限编码" width="300"></el-table-column>
