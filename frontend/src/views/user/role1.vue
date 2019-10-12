@@ -51,9 +51,9 @@
         <template slot-scope="scope">
           <div v-if="scope.row.roleName!='管理员'">
             <el-button type="primary" icon="edit" @click="showUpdate(scope.$index)" v-if="hasPerm('role:update')">修改</el-button>
+            <!--只有在当前角色的用户数为0的情况下才可以删除-->
             <el-button v-if=" scope.row.users && scope.row.users.length===0 && hasPerm('role:delete')" type="danger"
-                       icon="delete"
-                       @click="removeRole(scope.$index)">
+                       @click="removeRole(scope)">
               删除
             </el-button>
           </div>
@@ -133,6 +133,7 @@
             method:"get"
           }).then(data =>{
             this.allPermission = data.list;
+            console.log(data.list)
           })
         },
         getList(){
@@ -236,7 +237,9 @@
           }
           return result;
         },
-        removeRole($index) {
+        removeRole(scope) {
+          console.log("*******");
+          console.log(scope);
           let _vue = this;
           this.$confirm('确定删除此角色?', '提示', {
             confirmButtonText: '确定',

@@ -22,8 +22,9 @@ public class MenuServiceImpl implements MenuService {
     public JSONObject getAllMenu(JSONObject jsonObject) {
         CommonUtil.fillPageParam(jsonObject);
         int count = menuDao.countMenus(jsonObject);
+        List<Integer> countEach = menuDao.countPermissionEachMenu();
         List<JSONObject> list = menuDao.getMenuList(jsonObject);
-        return CommonUtil.successPage(jsonObject, list, count);
+        return CommonUtil.menuSuccessPage(jsonObject, list, countEach,count);
     }
 
     @Override

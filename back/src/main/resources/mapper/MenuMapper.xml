@@ -2,6 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.oneworld.back.dao.MenuDao">
+    <resultMap id="menuMap" type="com.oneworld.back.utils.model.One2Many">
+            <id column="menuCode" property="menuCode"/>
+            <result column="menuName" property="menuName"/>
+            <collection property="permissions" ofType="com.alibaba.fastjson.JSONObject">
+                <id column="permissionId" property="permissionId"/>
+                <result column="permissionCode" property="permissionCode"/>
+                <result column="permissionName" property="permissionName"/>
+            </collection>
+    </resultMap>
     <select id="getMenuList" resultType="com.alibaba.fastjson.JSONObject" parameterType="com.alibaba.fastjson.JSONObject">
         select
         id id,
@@ -19,6 +28,11 @@
     <select id="countMenus" resultType="Integer">
         SELECT count(0)
         FROM sys_permission p
+        where p.delete_status = 1
+    </select>
+
+    <select id="countPermissionEachMenu" resultType="Integer">
+        SELECT count(menu_code) FROM sys_permission p GROUP BY menu_code
     </select>
 
     <update id="deleteMenu">
