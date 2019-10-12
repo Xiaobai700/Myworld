@@ -41,6 +41,13 @@ export const constantRouterMap = [
         menu:'article'
       },
       {
+        path: '/newArticle',
+        name: 'newArticle',
+        component: _import('article/newArticle'),
+        meta:{title:'创建文章'},
+        menu:'newArticle'
+      },
+      {
         path: '/page2',
         name: 'page2',
         component: _import('other/page2'),

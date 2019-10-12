@@ -125,16 +125,10 @@
       },
       // 文件状态改变时的钩子
       fileChange(file, fileList) {
-        console.log('change')
-        console.log(file)
-        this.form.file = file.raw
-        console.log(this.form.file)
-        console.log(fileList)
+        this.form.file = file.raw;
       },
       // 上传文件之前的钩子, 参数为上传的文件,若返回 false 或者返回 Promise 且被 reject，则停止上传
       beforeUploadFile(file) {
-        console.log('before upload')
-        console.log(file)
         let extension = file.name.substring(file.name.lastIndexOf('.')+1)
         let size = file.size / 1024 / 1024
         if(extension !== 'xlsx') {
@@ -175,8 +169,8 @@
       },
       uploadFile() {
         if(this.form.file){
-          this.$refs.uploadExcel.submit()
-          let formData = new FormData()
+          this.$refs.uploadExcel.submit();
+          let formData = new FormData();
           formData.append('file', this.form.file)
           axios.post('/article/importExcel',
             formData,

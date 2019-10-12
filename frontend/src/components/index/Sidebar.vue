@@ -13,7 +13,11 @@
             <i class="el-icon-grape"></i>
             <span>文章列表</span>
           </el-menu-item>
-          <el-menu-item :route="{name: 'page2'}" index="1-2">
+          <el-menu-item :route="{name: 'newArticle'}" index="1-2">
+            <i class="el-icon-watermelon"></i>
+            <span>创建文章</span>
+          </el-menu-item>
+          <el-menu-item :route="{name: 'page2'}" index="1-3">
             <i class="el-icon-watermelon"></i>
             <span>page2</span>
           </el-menu-item>
