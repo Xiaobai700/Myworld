@@ -47,6 +47,7 @@
     <el-table
       ref="multipleTable"
       :data="list"
+      @cell-click="cellClick"
       tooltip-effect="dark"
       style="width: 100%"
       @selection-change="handleSelectionChange">
@@ -310,6 +311,11 @@
       getIndex($index) {
         //表格序号
         return (this.listQuery.pageNum - 1) * this.listQuery.pageRow + $index + 1
+      },
+      cellClick(row, column, cell, event){
+        console.log("row")
+        console.log(row)
+        this.$router.push({path:'/newArticle',query:{row:row}})
       }
     }
   }

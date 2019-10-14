@@ -36,6 +36,7 @@
 
 <script>
   import axios from 'axios';
+
     export default {
         name: "newArticle",
         data(){
@@ -88,6 +89,12 @@
             },
           }
         },
+      created(){
+          if(this.$route.params){
+            let row =this.$route.query.row;
+          }
+
+      },
       methods:{
         $imgAdd(pos, $file){
           // 第一步.将图片上传到服务器.
