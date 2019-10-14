@@ -60,7 +60,7 @@
         </template>
       </el-table-column>
       <el-table-column
-        prop="content"
+        prop="title"
         label="文章"
         width="320"
         show-overflow-tooltip>

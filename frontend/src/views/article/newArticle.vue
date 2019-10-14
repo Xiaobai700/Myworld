@@ -4,10 +4,10 @@
       <el-button v-if="this.isButton" type="primary" @click="articleSave">发布</el-button>
     </div>
     <div class="one">
-      <!--上传封面图片-->
+     <!-- 上传封面图片-->
       <el-upload
         class="avatar-uploader"
-        action="https://jsonplaceholder.typicode.com/posts/"
+        action="http://localhost:8081/article/uploadImg"
         :show-file-list="false"
         :on-success="handleAvatarSuccess"
         :before-upload="beforeAvatarUpload">
@@ -20,27 +20,36 @@
       <el-input
         type="textarea"
         placeholder="请输入标题（最多50个字）"
-        v-model="myArticle.content"
+        v-model="myArticle.title"
         maxlength="50"
         show-word-limit
       >
       </el-input>
     </div>
-    <mavon-editor :toolbars="markdownOption" @fullScreen="fullScreen" v-model="value"/>
+    <mavon-editor ref=md
+                  :toolbars="markdownOption"
+                  @fullScreen="fullScreen"
+                  @imgAdd="$imgAdd"
+                  v-model="myArticle.content"/>
   </div>
 </template>
 
 <script>
+  import axios from 'axios';
     export default {
         name: "newArticle",
         data(){
           return{
             value:'',
             imageUrl: '',
+            imageFile:'',
             isButton:true,
             myArticle:{
-              id:'',
+              title:'',
               content:'',
+              authorId:1,
+              type:2,
+              bgmImg:''
             },
             markdownOption: {
               bold: true, // 粗体
@@ -80,12 +89,31 @@
           }
         },
       methods:{
+        $imgAdd(pos, $file){
+          // 第一步.将图片上传到服务器.
+          let formdata = new FormData();
+          formdata.append('image', $file);
+          axios({
+            url: '/article/uploadImg',
+            method: 'post',
+            data: formdata,
+            headers: { 'Content-Type': 'multipart/form-data' },
+          }).then((url) => {
+            // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
+            let $vm = this.$refs.md;
+            $vm.$img2Url(pos,"http://localhost:8081/images/"+url.data);
+          })
+        },
         articleSave(){
           this.api({
             url: "/article/addArticle",
             method: "post",
             data: this.myArticle
           }).then(() => {
+            this.myArticle.content='',
+            this.myArticle.title='',
+            this.myArticle.bgmImg='',
+            this.imageUrl=''
             this.$message({
               type: 'success',
               message: "创建文章成功!"
@@ -94,17 +122,30 @@
         },
         handleAvatarSuccess(res, file) {
           this.imageUrl = URL.createObjectURL(file.raw);
+          this.imageFile = file.raw;
+          let formdata = new FormData();
+          formdata.append('image',file.raw);
+          axios({
+            url: '/article/uploadImg',
+            method: 'post',
+            data: formdata,
+            headers: { 'Content-Type': 'multipart/form-data' },
+          }).then((url) => {
+            this.imageUrl="http://localhost:8081/images/"+url.data;
+            this.myArticle.bgmImg=this.imageUrl;
+          })
+
         },
         beforeAvatarUpload(file) {
           const isJPG = file.type === 'image/jpeg';
           const isLt2M = file.size / 1024 / 1024 < 2;
 
-          if (!isJPG) {
-            this.$message.error('上传头像图片只能是 JPG 格式!');
-          }
-          if (!isLt2M) {
-            this.$message.error('上传头像图片大小不能超过 2MB!');
-          }
+         // if (!isJPG) {
+           // this.$message.error('上传头像图片只能是 JPG 格式!');
+          //}
+          //if (!isLt2M) {
+            //this.$message.error('上传头像图片大小不能超过 2MB!');
+          //}
           return isJPG && isLt2M;
         },
         fullScreen(){

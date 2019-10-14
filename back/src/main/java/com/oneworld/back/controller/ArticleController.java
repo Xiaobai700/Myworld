@@ -8,8 +8,10 @@ import com.alibaba.excel.support.ExcelTypeEnum;
 import com.alibaba.fastjson.JSONObject;
 import com.oneworld.back.controller.easyexcel.ArticleModel;
 import com.oneworld.back.controller.easyexcel.ExcelListener;
+import com.oneworld.back.entity.IPTimeStamp;
 import com.oneworld.back.service.ArticleService;
 import com.oneworld.back.utils.CommonUtil;
+import com.oneworld.back.utils.constants.ErrorEnum;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +19,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 /**
@@ -159,5 +162,50 @@ public class ArticleController {
 		}
 	}
 
-
+	@RequestMapping(value = "/uploadImg")
+	@CrossOrigin
+	public String uploadImg(HttpServletRequest request,@RequestParam("image") MultipartFile image)throws IOException{
+		/*String result = "error";
+		if(!image.isEmpty()){
+			IPTimeStamp ipTimeStamp = new IPTimeStamp(image.getOriginalFilename());
+			String fileName ="";
+			fileName=ipTimeStamp.getIPTimeRand();
+			image.transferTo(new File(request.getSession().getServletContext().getRealPath("/")+fileName));
+			result = request.getSession().getServletContext().getRealPath("/")+fileName;
+		}
+		System.out.println(result);
+		return result;*/
+		InputStream inputStream = null;
+		OutputStream os = null;
+		String path = null;
+		String fileName = System.currentTimeMillis()+"_"+image.getOriginalFilename();
+		try{
+			byte[] bs = new byte[1024];
+			// 读取到的数据长度
+			int len;
+			// 输出的文件流保存到本地文件
+			File tempFile = new File("D:\\upload");
+			if (!tempFile.exists()) {
+				tempFile.mkdirs();
+			}
+			inputStream = image.getInputStream();
+			path = tempFile.getPath() + File.separator + fileName;
+			os = new FileOutputStream(path);
+			// 开始读取
+			while ((len = inputStream.read(bs)) != -1) {
+				os.write(bs, 0, len);
+			}
+		}catch (IOException e){
+			e.printStackTrace();
+		}finally {
+			// 完毕，关闭所有链接
+			try {
+				os.close();
+				inputStream.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return fileName;
+	}
 }

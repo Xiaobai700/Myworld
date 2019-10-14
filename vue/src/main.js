@@ -18,7 +18,7 @@ Vue.prototype.hasPerm = hasPermission
 Vue.config.productionTip = (process.env.NODE_ENV != 'production')
 import axios from 'axios';
 Vue.prototype.$axios = axios;
-axios.defaults.baseURL = '/api'  //解决axios跨域问题
+axios.defaults.baseURL = '/api'; //解决axios跨域问题
 new Vue({
   el: '#app',
   router,

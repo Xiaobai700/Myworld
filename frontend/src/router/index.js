@@ -29,7 +29,7 @@ export const constantRouterMap = [
   {
     path: '/index',
     component: Index,
-    redirect: '/page1',
+    redirect: '/article',
     name: '文章',
     meta:{title:'文章'},
     children: [
