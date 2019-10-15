@@ -95,6 +95,7 @@
           }
         },
       created(){
+        let saveOrUpdate = JSON.parse(sessionStorage.getItem("article-vuex-along")).root.myArticle.myArticle;
           if(this.$route.params.row){
             this.$store.dispatch('setArticle',this.$route.params.row);
             let row =this.$route.params.row;
@@ -103,7 +104,7 @@
             this.myArticle.content = row.content;
             this.myArticle.bgmImg = row.bgmImg;
             this.buttonStatus = 'update';
-          }else if(JSON.parse(sessionStorage.getItem("article-vuex-along")).root.myArticle.myArticle) {
+          }else if(saveOrUpdate && saveOrUpdate.content !== '') {
             let obj = JSON.parse(sessionStorage.getItem("article-vuex-along"));
             let row = obj.root.myArticle.myArticle;
             this.myArticle.id = row.id;
@@ -124,6 +125,7 @@
       },
       destroyed(){
         this.$store.dispatch('resetArticle');
+        this.buttonStatus = 'save';
       },
       methods:{
         $imgAdd(pos, $file){
@@ -171,6 +173,7 @@
               type: 'success',
               message: "修改文章成功!"
             });
+              //跳转至文章列表页
               this.$router.push({name:'article'});
           })
         },
