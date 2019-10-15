@@ -1,8 +1,13 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div id="sudoku-demo" class="demo">
     <h1>Lazy Sudoku</h1>
     <p>Keep hitting the shuffle button until you win.</p>
-
+    <page2 v-bind:todos="todos">
+      <template v-slot:todo="{ todo }">
+        <span v-if="todo.isComplete">✓</span>
+        {{ todo.text }}
+      </template>
+    </page2>
     <button @click="shuffle">
       Shuffle
     </button>
@@ -16,9 +21,15 @@
 
 <script>
   /*nide.js安装lodash*/
+  import page2 from "./page2";
+
   var _ = require('lodash');
     export default {
       name: "page3",
+      components: {page2},
+      comments:{
+        page2
+      },
       data() {
         return {
           cells: Array.apply(null, { length: 81 })
@@ -27,7 +38,17 @@
                 id: index,
                 number: index % 9 + 1
               }
-            })
+            }),
+          todos:[
+            {
+              isComplete:true,
+              text:'测试数据1'
+            },
+            {
+              isComplete:true,
+              text:'测试数据2'
+            }
+          ]
         }
       },
       methods: {
