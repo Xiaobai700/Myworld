@@ -319,7 +319,7 @@
         return (this.listQuery.pageNum - 1) * this.listQuery.pageRow + $index + 1
       },
       cellClick(row, column, cell, event){
-        this.$router.push({path:'/newArticle',query:{row:row}})
+        this.$router.push({name:'newArticle',params:{row:row}})
       }
     }
   }

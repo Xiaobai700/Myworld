@@ -18,14 +18,16 @@
     </div>
     <div class="two">
       <!--填写标题-->
-      <el-input
-        type="textarea"
-        placeholder="请输入标题（最多50个字）"
-        v-model="myArticle.title"
-        maxlength="50"
-        show-word-limit
-      >
-      </el-input>
+      <keep-alive>
+        <el-input
+          type="textarea"
+          placeholder="请输入标题（最多50个字）"
+          v-model="myArticle.title"
+          maxlength="50"
+          show-word-limit
+        >
+        </el-input>
+      </keep-alive>
     </div>
     <mavon-editor ref=md
                   :toolbars="markdownOption"
@@ -93,14 +95,35 @@
           }
         },
       created(){
-          if(this.$route.query.row){
-            let row =this.$route.query.row;
+          if(this.$route.params.row){
+            this.$store.dispatch('setArticle',this.$route.params.row);
+            let row =this.$route.params.row;
+            this.myArticle.id = row.id;
+            this.myArticle.title = row.title;
+            this.myArticle.content = row.content;
+            this.myArticle.bgmImg = row.bgmImg;
+            this.buttonStatus = 'update';
+          }else if(JSON.parse(sessionStorage.getItem("article-vuex-along")).root.myArticle.myArticle) {
+            let obj = JSON.parse(sessionStorage.getItem("article-vuex-along"));
+            let row = obj.root.myArticle.myArticle;
             this.myArticle.id = row.id;
             this.myArticle.title = row.title;
             this.myArticle.content = row.content;
             this.myArticle.bgmImg = row.bgmImg;
             this.buttonStatus = 'update';
           }
+      },
+      beforeCreate(){
+      },
+      activated(){//keep-alive组件激活时调用
+      },
+      deactivated(){//keep-alive组件停用时调用
+      },
+      mounted(){//el被新创建的vm.$el替换，并挂载到实例上使用该钩子
+
+      },
+      destroyed(){
+        this.$store.dispatch('resetArticle');
       },
       methods:{
         $imgAdd(pos, $file){
