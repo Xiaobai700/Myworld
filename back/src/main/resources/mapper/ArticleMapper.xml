@@ -22,7 +22,8 @@
             w.title                                 title,
             w.content                               content,
             w.bgm_img                                bgmImg,
-            date_format(w.create_time, '%Y.%m.%d %T') createTime
+            date_format(w.create_time, '%Y.%m.%d %T') createTime,
+            date_format(w.update_time, '%Y.%m.%d %T') updateTime
         FROM article_detail w
         WHERE w.delete_status = '1'
         ORDER BY w.id DESC

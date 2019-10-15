@@ -67,8 +67,12 @@
         show-overflow-tooltip>
       </el-table-column>
       <el-table-column
-        label="日期">
+        label="创建日期">
         <template slot-scope="scope">{{scope.row.createTime}}</template>
+      </el-table-column>
+      <el-table-column
+        label="最新更新日期">
+        <template slot-scope="scope">{{scope.row.updateTime}}</template>
       </el-table-column>
     </el-table>
     <el-pagination
