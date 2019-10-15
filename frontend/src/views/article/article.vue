@@ -333,6 +333,7 @@
     margin-top: 3px;
   }
   .filter-container{
+    margin-top: 5px;
     margin-left: 5px;
     float: left;
   }
