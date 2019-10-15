@@ -1,7 +1,8 @@
 <template>
   <div class="myArticle">
     <div class="myButton">
-      <el-button v-if="this.isButton" type="primary" @click="articleSave">发布</el-button>
+      <el-button v-if="isButton && buttonStatus==='save' " type="primary" @click="articleSave">发布</el-button>
+      <el-button v-if="isButton && buttonStatus==='update' " type="success" @click="articleUpdate">更新</el-button>
     </div>
     <div class="one">
      <!-- 上传封面图片-->
@@ -11,7 +12,7 @@
         :show-file-list="false"
         :on-success="handleAvatarSuccess"
         :before-upload="beforeAvatarUpload">
-        <img v-if="imageUrl" :src="imageUrl" class="avatar">
+        <img v-if="myArticle.bgmImg" :src="myArticle.bgmImg" class="avatar">
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
       </el-upload>
     </div>
@@ -45,7 +46,9 @@
             imageUrl: '',
             imageFile:'',
             isButton:true,
+            buttonStatus:'save',
             myArticle:{
+              id:'',
               title:'',
               content:'',
               authorId:1,
@@ -90,10 +93,14 @@
           }
         },
       created(){
-          if(this.$route.params){
+          if(this.$route.query.row){
             let row =this.$route.query.row;
+            this.myArticle.id = row.id;
+            this.myArticle.title = row.title;
+            this.myArticle.content = row.content;
+            this.myArticle.bgmImg = row.bgmImg;
+            this.buttonStatus = 'update';
           }
-
       },
       methods:{
         $imgAdd(pos, $file){
@@ -117,14 +124,31 @@
             method: "post",
             data: this.myArticle
           }).then(() => {
-            this.myArticle.content='',
-            this.myArticle.title='',
-            this.myArticle.bgmImg='',
-            this.imageUrl=''
+            this.myArticle.content='';
+            this.myArticle.title='';
+            this.myArticle.bgmImg='';
+            this.imageUrl='';
             this.$message({
               type: 'success',
               message: "创建文章成功!"
             });
+          })
+        },
+        articleUpdate(){
+          this.api({
+            url: "/article/updateArticle",
+            method: "post",
+            data: this.myArticle
+          }).then(() => {
+              this.myArticle.content='';
+              this.myArticle.title='';
+              this.myArticle.bgmImg='';
+              this.buttonStatus = 'save';
+              this.$message({
+              type: 'success',
+              message: "修改文章成功!"
+            });
+              this.$router.push({name:'article'});
           })
         },
         handleAvatarSuccess(res, file) {

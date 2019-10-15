@@ -8,10 +8,8 @@ import com.alibaba.excel.support.ExcelTypeEnum;
 import com.alibaba.fastjson.JSONObject;
 import com.oneworld.back.controller.easyexcel.ArticleModel;
 import com.oneworld.back.controller.easyexcel.ExcelListener;
-import com.oneworld.back.entity.IPTimeStamp;
 import com.oneworld.back.service.ArticleService;
 import com.oneworld.back.utils.CommonUtil;
-import com.oneworld.back.utils.constants.ErrorEnum;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 
 /**
@@ -52,7 +47,7 @@ public class ArticleController {
 	@RequiresPermissions("article:add")
 	@PostMapping("/addArticle")
 	public JSONObject addArticle(@RequestBody JSONObject requestJson) {
-		CommonUtil.hasAllRequired(requestJson, "content");
+		CommonUtil.hasAllRequired(requestJson, "title,content,bgmImg");
 		return articleService.addArticle(requestJson);
 	}
 
@@ -62,7 +57,7 @@ public class ArticleController {
 	@RequiresPermissions("article:update")
 	@PostMapping("/updateArticle")
 	public JSONObject updateArticle(@RequestBody JSONObject requestJson) {
-		CommonUtil.hasAllRequired(requestJson, "id,content");
+		CommonUtil.hasAllRequired(requestJson, "id,title,content,bgmImg");
 		return articleService.updateArticle(requestJson);
 	}
 

@@ -247,6 +247,8 @@
           params: this.listQuery
         }).then(data => {
           this.list = data.list;
+          console.log("data.list");
+          console.log(data.list);
           this.totalCount = data.totalCount;
         })
       },
@@ -313,8 +315,6 @@
         return (this.listQuery.pageNum - 1) * this.listQuery.pageRow + $index + 1
       },
       cellClick(row, column, cell, event){
-        console.log("row")
-        console.log(row)
         this.$router.push({path:'/newArticle',query:{row:row}})
       }
     }

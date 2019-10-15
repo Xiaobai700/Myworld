@@ -20,6 +20,8 @@
         SELECT
             w.id                                      id,
             w.title                                 title,
+            w.content                               content,
+            w.bgm_img                                bgmImg,
             date_format(w.create_time, '%Y.%m.%d %T') createTime
         FROM article_detail w
         WHERE w.delete_status = '1'
@@ -30,7 +32,9 @@
     <update id="updateArticle" parameterType="com.alibaba.fastjson.JSONObject">
         UPDATE article_detail
         SET
-            title = #{content}
+            title = #{title},
+            content = #{content},
+            bgm_img = #{bgmImg}
         WHERE id = #{id}
     </update>
 
