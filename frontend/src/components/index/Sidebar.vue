@@ -38,6 +38,10 @@
             <i class="el-icon-basketball"></i>
             <span slot="title">测试页面2</span>
           </el-menu-item>
+          <el-menu-item :route="{name: 'page1'}" index="2-3">
+            <i class="el-icon-umbrella"></i>
+            <span slot="title">keep-alive例子</span>
+          </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
 

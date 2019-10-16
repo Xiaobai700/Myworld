@@ -1,43 +1,10 @@
 <template>
-  <div id="dynamic-component-demo">
-    <button
-      v-for="tab in tabs"
-      v-bind:key="tab"
-      v-bind:class="['tab-button', { active: currentTab === tab }]"
-      v-on:click="currentTab = tab"
-      >
-      {{tab}}
-    </button>
-
-    <keep-alive>
-        <tab-archive v-if="currentTabComponent === 'tab-archive'"></tab-archive>
-        <tab-posts   v-if="currentTabComponent === 'tab-posts'"></tab-posts>
-    </keep-alive>
-  </div>
+  <div>Archive component</div>
 </template>
 
 <script>
-  import TabArchive from '../../components/demo/tab-archive'
-  import TabPosts from '../../components/demo/tab-posts'
     export default {
-        name: "page1",
-      components: {TabPosts, TabArchive},
-      data() {
-            return {
-              currentTab: 'Posts',
-              tabs: ['Posts', 'Archive']
-            }
-        },
-        computed:{
-          currentTabComponent: function () {
-            return 'tab-' + this.currentTab.toLowerCase()
-          }
-        },
-        created(){
-        },
-        methods: {
-
-        }
+        name: "tab-archive"
     }
 </script>
 

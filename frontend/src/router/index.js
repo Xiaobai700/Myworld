@@ -71,6 +71,13 @@ export const constantRouterMap = [
         menu:'page3'
       },
       {
+        path: '/page1',
+        name: 'page1',
+        component: _import('other/page1'),
+        meta:{title:'keep-alive例子'},
+        menu:'page1'
+      },
+      {
         path: '/page4',
         name: 'page4',
         component: _import('other/page4'),
