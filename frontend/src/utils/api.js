@@ -7,11 +7,13 @@ const service = axios.create({
   baseURL: process.env.BASE_URL, // api的base_url
   timeout: 15000                  // 请求超时时间2
 });
-// request拦截器
+// request拦截器 在请求或响应被 then 或 catch 处理前拦截它们
 service.interceptors.request.use(config => {
+  //在发送请求之前做些什么
   return config
 }, error => {
-  // Do something with request error
+ //对请求错误做些什么
+  console.log("请求错误出现错误....")
   console.error(error);// for debug
   Promise.reject(error)
 });
@@ -19,6 +21,8 @@ service.interceptors.request.use(config => {
 service.interceptors.response.use(
   response => {
     const res = response.data;
+    console.log("user.js#res########");
+    console.log(res);
     if (res.code == '1000') {
       return res;
     }

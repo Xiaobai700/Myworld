@@ -63,7 +63,7 @@ const user = {
           store.dispatch('GenerateRoutes', userPermission).then(() => {
             //生成该用户的新路由json操作完毕之后,调用vue-router的动态新增路由方法,将新路由添加
             router.addRoutes(store.getters.addRouters)
-          })
+          });
           resolve(data)
         }).catch(error => {
           reject(error)
@@ -76,19 +76,19 @@ const user = {
           url: "login/logout",
           method: "post"
         }).then(data => {
-          commit('RESET_USER')
-          removeToken()
+          commit('RESET_USER');
+          removeToken();
           resolve(data);
         }).catch(() => {
-          commit('RESET_USER')
+          commit('RESET_USER');
           removeToken()
         })
       })
     },
     FedLogOut({commit}) {
       return new Promise(resolve => {
-        commit('RESET_USER')
-        removeToken()
+        commit('RESET_USER');
+        removeToken();
         resolve()
       })
     }

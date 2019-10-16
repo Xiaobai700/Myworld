@@ -34,6 +34,7 @@
                       //分发Action
                       this.$store.dispatch('Login', this.form).then(data => {
                         if ("success" === data.result) {
+                          this.$store.dispatch('resetArticle');
                           this.$router.push({path: '/index'})
                         } else {
                           this.$message.error("账号/密码错误");
