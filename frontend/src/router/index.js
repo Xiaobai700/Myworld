@@ -26,10 +26,11 @@ export const constantRouterMap = [
       }
     ]
   },
+  {path: '/404', component: _import('404'), hidden: true}/*,
   {
     path: '/index',
     component: Index,
-    redirect: '/article',
+    redirect: '/page1',
     name: '文章',
     meta:{title:'文章'},
     children: [
@@ -71,13 +72,6 @@ export const constantRouterMap = [
         menu:'page3'
       },
       {
-        path: '/page1',
-        name: 'page1',
-        component: _import('other/page1'),
-        meta:{title:'keep-alive例子'},
-        menu:'page1'
-      },
-      {
         path: '/page4',
         name: 'page4',
         component: _import('other/page4'),
@@ -115,25 +109,32 @@ export const constantRouterMap = [
         menu:'menu'
       }
     ]
-  }
+  }*/
 ]
 export const asyncRouterMap = [
   {
     path: '/index',
     component: Index,
-    redirect: '/index/page1',
+    redirect: '/page1',
     name: '文章',
     meta:{title:'文章'},
     children: [
       {
-        path: '/page1',
-        name: '文章列表',
-        component: _import('other/page1'),
+        path: 'article',
+        name: 'article',
+        component: _import('article/article'),
         meta:{title:'文章列表'},
-        menu:'page1'
+        menu:'article'
       },
       {
-        path: '/page2',
+        path: 'newArticle',
+        name: 'newArticle',
+        component: _import('article/newArticle'),
+        meta:{title:'创建文章'},
+        menu:'newArticle'
+      },
+      {
+        path: 'page2',
         name: 'page2',
         component: _import('other/page2'),
         meta:{title:'page2'},
@@ -144,25 +145,57 @@ export const asyncRouterMap = [
   {
     path: '/index',
     component: Index,
-    redirect: '/index/page3',
+    redirect: '/page3',
+    meta:{title:'测试'},
     name: '测试',
     children: [
       {
-        path: '/page3',
-        name: '测试页面1',
+        path: 'page3',
+        name: 'page3',
         component: _import('other/page3'),
-        meta:{title:'测试页面1'},
+        meta:{title:'transition例子'},
         menu:'page3'
       },
       {
-        path: '/page4',
-        name: '测试页面2',
+        path: 'page4',
+        name: 'page4',
         component: _import('other/page4'),
         meta:{title:'测试页面2'},
         menu:'page4'
       }
     ]
+  },
+  {
+    path: '/index',
+    component: Index,
+    redirect: '/role',
+    meta: {title: '用户权限'},
+    name: '用户权限',
+    children: [
+      {
+        path: 'role',
+        name: 'role',
+        component: _import('user/role1'),
+        meta: {title: '角色管理'},
+        menu: 'role'
+      },
+      {
+        path: 'user',
+        name: 'user',
+        component: _import('user/user1'),
+        meta: {title: '用户列表'},
+        menu: 'user'
+      },
+      {
+        path: 'menu',
+        name: 'menu',
+        component: _import('menu/menu'),
+        meta: {title: '菜单列表'},
+        menu: 'menu'
+      }
+    ]
   }
+
 ]
 
 export default new Router({

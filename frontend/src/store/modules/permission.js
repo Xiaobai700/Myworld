@@ -27,7 +27,7 @@ function filterAsyncRouter(asyncRouters,menus) {
       return true;
     }
     return false;
-  })
+  });
   return accessedRouters
 }
 
@@ -38,8 +38,12 @@ const permission = {
   },
   mutations: {
     SET_ROUTERS: (state,routers) => {
+      console.log("SET_ROUTERS前参数")
+      console.log(routers)
       state.addRoutes = routers;
       state.routes = constantRouterMap.concat(routers)
+      console.log("SET_ROUTERS后")
+      console.log(state.addRoutes)
     }
   },
   actions: {
@@ -53,11 +57,11 @@ const permission = {
         }else {
           accessRouters = filterAsyncRouter(asyncRouterMap,menus)
         }
-        commit('SET_ROUTERS',accessRouters)
+        commit('SET_ROUTERS',accessRouters);
         resolve()
       })
     }
   }
-}
+};
 
 export default permission

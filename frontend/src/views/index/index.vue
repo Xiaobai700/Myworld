@@ -5,7 +5,7 @@
       </el-header>
       <el-container>
         <el-aside width="200px">
-          <sidebar></sidebar>
+          <sidebar class="sidebar-container"></sidebar>
         </el-aside>
         <el-container>
           <el-header style="height: 38px;background-color: rgb(245,245,245)">
@@ -21,7 +21,7 @@
 
 <script>
     import PageHeader from '../../components/index/PageHeader'
-    import Sidebar from '../../components/index/Sidebar'
+    import Sidebar from '../../components/index/Sidebar/index'
     import AppMain from '../../components/index/AppMain'
     import Navbar from "../../components/index/Navbar";
     export default {

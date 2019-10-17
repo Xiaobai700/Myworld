@@ -21,8 +21,6 @@ service.interceptors.request.use(config => {
 service.interceptors.response.use(
   response => {
     const res = response.data;
-    console.log("user.js#res########");
-    console.log(res);
     if (res.code == '1000') {
       return res;
     }

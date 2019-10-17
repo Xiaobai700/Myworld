@@ -3,7 +3,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/zh-CN'
 import App from './App'
-import router from './router'
+import router from './router/index'
 import store from './store'
 import '@/permission' // 权限
 import {default as api} from './utils/api'
@@ -12,7 +12,6 @@ import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 Vue.use(mavonEditor);
 Vue.use(ElementUI, {locale});
-
 Vue.prototype.api = api;
 //全局的常量
 Vue.prototype.hasPerm = hasPermission;
@@ -32,11 +31,10 @@ Vue.directive('pin', {
   }
 });
 
-
 new Vue({
   el: '#app',
   router,
   store,
   template: '<App/>',
   components: {App}
-});
+})
