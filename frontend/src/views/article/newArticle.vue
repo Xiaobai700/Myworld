@@ -1,8 +1,8 @@
 <template>
   <div class="myArticle">
     <div class="myButton">
-      <el-button v-if="isButton && buttonStatus==='save' " type="primary" @click="articleSave">发布</el-button>
-      <el-button v-if="isButton && buttonStatus==='update' " type="success" @click="articleUpdate">更新</el-button>
+      <el-button v-pin="100" v-if="isButton && buttonStatus==='save' " type="primary" @click="articleSave">发布</el-button>
+      <el-button v-pin="100" v-if="isButton && buttonStatus==='update' " type="success" @click="articleUpdate">更新</el-button>
     </div>
     <div class="one">
      <!-- 上传封面图片-->
@@ -215,10 +215,12 @@
 
 <style scoped>
   .myButton{
+    margin-left: -900px;
     /*按钮固定不动，显示在所有组件之上*/
-    position: fixed;
+    /*使用自定义指令来实现*/
+    /*position: fixed;
     top: 100px;
-    z-index: 9999;
+    z-index: 9999;*/
   }
   .myArticle{
     width: 900px;

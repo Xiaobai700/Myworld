@@ -21,6 +21,17 @@ Vue.config.productionTip = (process.env.NODE_ENV != 'production');
 import axios from 'axios';
 Vue.prototype.$axios = axios;
 axios.defaults.baseURL = '/api'; //解决axios跨域问题
+
+//自定义指令 把元素固定在页面上 并且显示在所有组件之上
+Vue.directive('pin', {
+  bind: function (el, binding, vnode) {
+    el.style.position = 'fixed';
+    el.style.top = binding.value + 'px';
+    el.style.zIndex = 9999;
+  }
+});
+
+
 new Vue({
   el: '#app',
   router,
