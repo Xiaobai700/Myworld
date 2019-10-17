@@ -18,6 +18,7 @@ Vue.prototype.api = api;
 Vue.prototype.hasPerm = hasPermission;
 //生产环境时自动设置为 false 以阻止 vue 在启动时生成生产提示。
 Vue.config.productionTip = (process.env.NODE_ENV != 'production');
+Vue.config.keyCodes.enter = 112;
 import axios from 'axios';
 Vue.prototype.$axios = axios;
 axios.defaults.baseURL = '/api'; //解决axios跨域问题

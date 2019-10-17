@@ -7,7 +7,7 @@
       <el-input placeholder="请输入密码" v-model="form.password" show-password></el-input>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" style="width: 100%" @click.native.prevent="handleLogin">登录</el-button>
+      <el-button type="primary" style="width: 100%" v-on:enter="handleLogin" @click.native.prevent="handleLogin">登录</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -27,6 +27,21 @@
                 },
             }
         },
+      created(){
+        /*按下enter键进行登录*/
+        /**
+         * 注意：如果是对页面上的button添加键盘事件
+         * 不能直接写在input和button上因为获取不到焦点
+         * 要写在created下面
+         * */
+        let _this = this;
+        document.onkeydown = function(e) {
+          let key = window.event.keyCode;
+          if (key === 13) {
+            _this.handleLogin();
+          }
+        }
+      },
         methods: {
           handleLogin() {
                 this.$refs.form.validate(valid => {
