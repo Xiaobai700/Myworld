@@ -15,7 +15,7 @@ export const constantRouterMap = [
     path: '/index',
     component: Index,
     redirect: '/hello',
-    name: '首页',
+    name: 'index',
     hidden: true,
     children: [
       {

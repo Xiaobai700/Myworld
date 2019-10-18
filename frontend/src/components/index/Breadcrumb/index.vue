@@ -27,7 +27,6 @@
     methods: {
       getBreadcrumb() {
         let matched = this.$route.matched.filter(item => item.name);
-        debugger
         const first = matched[0];
         if (first && first.name !== '首页') {
           matched = [{ path: '/hello', meta: { title: '首页' }}].concat(matched)
