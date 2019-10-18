@@ -16,7 +16,7 @@ const getters = {
   type:state => state.myArticle.myArticle.type,
   bgmImg:state => state.myArticle.myArticle.bgmImg,
 
-  permission_routers: state => state.permission.routes,
-  addRouters: state => state.permission.addRoutes
+  permission_routers: state => state.permission.routers,
+  addRouters: state => state.permission.addRouters
 }
 export default getters

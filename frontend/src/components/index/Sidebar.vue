@@ -1,5 +1,5 @@
 <template>
-  <div class="leftBanner-box">
+  <!--<div class="leftBanner-box">
     <el-menu
       :router="true"
       class="el-menu-vertical-demo">
@@ -67,7 +67,7 @@
       </el-submenu>
 
     </el-menu>
-  </div>
+  </div>-->
 </template>
 
 <script>

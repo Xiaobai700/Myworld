@@ -23,9 +23,11 @@
         name: "Header",
         methods:{
             logout(){
-                console.log("退出");
-                this.$store.dispatch('LogOut').then(data =>{
-                    this.$router.push({path: '/'})
+                this.$store.dispatch('LogOut').then(() =>{
+                  //这里解决注销登录之后 不刷新页面 侧边导航栏无法正确显示菜单的问题
+                  //重新实例化vue-router对象 避免出现以上bug
+                  location.reload();
+                    //this.$router.push({path: '/'})
                 })
             }
         }

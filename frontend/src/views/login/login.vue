@@ -56,17 +56,6 @@
                         }
                       }).catch(() => {
                       })
-                       /* axios.post('/login/auth',this.form).then(data =>{
-                            if(data.data.code === '100'){
-                                this.$router.push({path:'/index'})
-                            }else{
-                                const h = this.$createElement;
-                                this.$notify({
-                                    title: '消息',
-                                    message: h('i', { style: 'color: teal'}, '登录失败！')
-                                });
-                            }
-                        })*/
                     }else {
                       return false;
                     }
