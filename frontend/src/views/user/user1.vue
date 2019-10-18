@@ -38,7 +38,7 @@
       <el-table-column label="管理" v-if="hasPerm('user:update')">
         <template slot-scope="scope">
           <el-button type="primary" icon="edit" @click="showUpdate(scope.$index)">修改</el-button>
-          <el-button type="danger" v-if="hasPerm('user:delete')&&scope.row.userId!==userId" @click="removeUser">删除</el-button>
+          <el-button type="danger" v-if="hasPerm('user:delete')&&scope.row.userId!==userId" @click="removeUser(scope.$index)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>

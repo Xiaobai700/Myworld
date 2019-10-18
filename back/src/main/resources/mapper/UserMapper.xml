@@ -73,7 +73,7 @@
 
         , role_id = #{roleId}
         , delete_status = #{deleteStatus}
-        WHERE id = #{userId} and id != 10001
+        WHERE id = #{userId} and id != 1
     </update>
 
     <update id="deleteUsers">
@@ -84,6 +84,7 @@
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
+        and id != 1
     </update>
     <resultMap id="roleMap" type="com.oneworld.back.utils.model.One2Many">
         <id column="roleId" property="roleId"/>
@@ -132,7 +133,8 @@
             p.menu_name           menuName,
             p.permission_name     permissionName,
             p.required_permission requiredPerm
-        FROM sys_permission p;
+        FROM sys_permission p
+        where p.delete_status = '1';
     </select>
 
     <insert id="insertRole" useGeneratedKeys="true" keyProperty="roleId">
