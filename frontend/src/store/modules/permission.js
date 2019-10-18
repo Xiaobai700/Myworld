@@ -18,6 +18,7 @@ function hasPermission(menus, route) {
  * 递归过滤异步路由表，返回符合用户菜单权限的路由表
  * */
 function filterAsyncRouter(asyncRouters,menus) {
+  debugger
   const accessedRouters = asyncRouters.filter(route =>{
     if(hasPermission(menus,route)){
       if(route.children && route.children.length){
@@ -27,19 +28,19 @@ function filterAsyncRouter(asyncRouters,menus) {
       return true;
     }
     return false;
-  });
+  })
   return accessedRouters
 }
 
 const permission = {
   state: {
-    routes:constantRouterMap,
-    addRoutes: []
+    routers:constantRouterMap,
+    addRouters: []
   },
   mutations: {
     SET_ROUTERS: (state,routers) => {
-      state.addRoutes = routers;
-      state.routes = constantRouterMap.concat(routers)
+      state.addRouters = routers;
+      state.routers = constantRouterMap.concat(routers)
     }
   },
   actions: {
