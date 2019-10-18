@@ -27,4 +27,16 @@ public interface MenuDao {
      * 删除这个权限（逻辑删除）
      * */
     int deleteMenu(JSONObject jsonObject);
+
+    /**
+     * 添加权限
+     * */
+    int addMenu(JSONObject jsonObject);
+
+    /**
+     * 更新权限
+     * */
+    int updateMenu(JSONObject jsonObject);
+
+
 }

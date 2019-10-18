@@ -1,5 +1,12 @@
 <template>
   <div class="app-container">
+    <div class="filter-container">
+      <el-form>
+        <el-form-item>
+          <el-button type="primary" @click="showCreate">添加权限</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
     <el-table
       ref="multipleTable"
       :data="list"
@@ -8,10 +15,6 @@
       tooltip-effect="dark"
       style="width: 100%"
       @selection-change="handleSelectionChange">
-      <!--<el-table-column
-        type="selection"
-        width="55">
-      </el-table-column>-->
       <el-table-column align="center" label="序号" width="80">
         <template slot-scope="scope">
           <span v-text="getIndex(scope.$index)"> </span>
@@ -21,25 +24,9 @@
       <el-table-column prop="menuName" label="菜单名称" width="200"></el-table-column>
       <el-table-column prop="permissionCode" label="权限编码" width="200"></el-table-column>
       <el-table-column prop="permissionName" label="权限名称" width="200"></el-table-column>
-      <!--<el-table-column label="权限编码" width="300">
-        <template slot-scope="scope">
-          <div v-for="perm in scope.row.permissions">
-            <span>
-              {{perm.permissionCode}}
-            </span>
-          </div>
-        </template>
-      </el-table-column>-->
-      <!--<el-table-column label="权限名称" show-overflow-tooltip>
-        <template slot-scope="scope">
-          <div v-for="perm in scope.row.permissions">
-            <el-tag :key="perm.permissionName" v-text="perm.permissionName">
-            </el-tag>
-          </div>
-        </template>
-      </el-table-column>-->
       <el-table-column label="管理">
         <template slot-scope="scope">
+          <el-button type="primary" @click="showUpdate(scope.$index)">修改</el-button>
           <el-button type="danger"  @click="removeMenu(scope.$index)">删除</el-button>
         </template>
       </el-table-column>
@@ -53,6 +40,35 @@
       layout="total, sizes, prev, pager, next, jumper"
       :total=this.totalCount>
     </el-pagination>
+    <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
+      <el-form class="small-space" :model="tempMenu" label-position="left" label-width="80px"
+               style='width: 300px; margin-left:250px;'>
+        <el-form-item label="菜单编码" required>
+          <el-input type="text" v-model="tempMenu.menuCode">
+          </el-input>
+        </el-form-item>
+        <el-form-item label="菜单名称" v-if="dialogStatus=='create'" required>
+          <el-input type="text" v-model="tempMenu.menuName">
+          </el-input>
+        </el-form-item>
+        <el-form-item label="权限编码" required>
+          <el-input type="text" v-model="tempMenu.permissionCode">
+          </el-input>
+        </el-form-item>
+        <el-form-item label="权限名称" required>
+          <el-input type="text" v-model="tempMenu.permissionName">
+          </el-input>
+        </el-form-item>
+        <el-form-item>
+
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button v-if="dialogStatus=='create'" type="success" @click="createPermission">创 建</el-button>
+        <el-button type="primary" v-else @click="updatePermission">修 改</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -74,7 +90,7 @@
           dialogFormVisible:false,
           textMap: {
             update:'编辑',
-            create:'新建菜单'
+            create:'添加权限'
           },
           tempMenu: {
             id:'',
@@ -124,6 +140,56 @@
         getIndex($index) {
           //表格序号
           return (this.listQuery.pageNum - 1) * this.listQuery.pageRow + $index + 1
+        },
+        showCreate() {
+          //显示新增对话框
+          this.tempMenu.id = "";
+          this.tempMenu.menuCode = "";
+          this.tempMenu.menuName = "";
+          this.tempMenu.permissionCode = "";
+          this.tempMenu.permissionName = "";
+          this.dialogStatus = "create";
+          this.dialogFormVisible = true
+        },
+        showUpdate($index) {
+          let menu = this.list[$index];
+          this.tempMenu.id = menu.id;
+          this.tempMenu.menuCode = menu.menuCode;
+          this.tempMenu.menuName = menu.menuName;
+          this.tempMenu.permissionCode = menu.permissionCode;
+          this.tempMenu.permissionName = menu.permissionName;
+          this.dialogStatus = "update";
+          this.dialogFormVisible = true
+        },
+        createPermission(){
+          //创建新权限
+          this.api({
+            url: "/menu/addPermission",
+            method: "post",
+            data: this.tempMenu
+          }).then(() => {
+            this.getList();
+            this.dialogFormVisible = false;
+            this.$message({
+              type: 'success',
+              message: "创建成功!"
+            });
+          })
+        },
+        updatePermission(){
+          //更新权限
+          this.api({
+            url: "/menu/updatePermission",
+            method: "post",
+            data: this.tempMenu
+          }).then(() => {
+            this.getList();
+            this.dialogFormVisible = false;
+            this.$message({
+              type: 'success',
+              message: "更新成功!"
+            });
+          })
         },
         handleSelectionChange(val) {
           this.multipleSelection = val;
@@ -229,5 +295,9 @@
 </script>
 
 <style scoped>
-
+  .filter-container{
+    margin-top: 5px;
+    margin-left: 5px;
+    float: left;
+  }
 </style>

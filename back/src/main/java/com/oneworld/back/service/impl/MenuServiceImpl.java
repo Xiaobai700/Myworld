@@ -32,4 +32,18 @@ public class MenuServiceImpl implements MenuService {
         menuDao.deleteMenu(jsonObject);
         return CommonUtil.successJson();
     }
+
+    @Override
+    public JSONObject addMenu(JSONObject jsonObject) {
+        jsonObject.put("requiredPermission",1);
+        menuDao.addMenu(jsonObject);
+        return CommonUtil.successJson();
+    }
+
+    @Override
+    public JSONObject updateMenu(JSONObject jsonObject) {
+        jsonObject.put("requiredPermission",1);
+        menuDao.updateMenu(jsonObject);
+        return CommonUtil.successJson();
+    }
 }

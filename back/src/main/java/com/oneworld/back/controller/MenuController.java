@@ -30,4 +30,18 @@ public class MenuController {
     public JSONObject deleteMenu(@RequestBody JSONObject jsonObject) {
         return menuService.deleteMenu(jsonObject);
     }
+
+    @RequiresPermissions("menu:add")
+    @PostMapping("/addPermission")
+    public JSONObject addUser(@RequestBody JSONObject requestJson) {
+        CommonUtil.hasAllRequired(requestJson, "menuCode, menuName, permissionCode,permissionName");
+        return menuService.addMenu(requestJson);
+    }
+
+    @RequiresPermissions("menu:update")
+    @PostMapping("/updatePermission")
+    public JSONObject updateUser(@RequestBody JSONObject requestJson) {
+        CommonUtil.hasAllRequired(requestJson, "menuCode, menuName, permissionCode,permissionName");
+        return menuService.updateMenu(requestJson);
+    }
 }

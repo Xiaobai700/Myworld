@@ -11,4 +11,9 @@ public interface MenuService {
     JSONObject getAllMenu(JSONObject jsonObject);
 
     JSONObject deleteMenu(JSONObject jsonObject);
+
+    JSONObject addMenu(JSONObject jsonObject);
+
+    JSONObject updateMenu(JSONObject jsonObject);
+
 }
