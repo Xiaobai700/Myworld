@@ -32,8 +32,8 @@ export const asyncRouterMap = [
     path: '/index',
     component: Index,
     redirect: 'article',
-    name: '文章',
     meta:{title:'文章'},
+    name: '文章',
     children: [
       {
         path: 'article',

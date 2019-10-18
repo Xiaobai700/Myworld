@@ -61,8 +61,6 @@ const user = {
           let userPermission = data.userPermission;
           store.dispatch('GenerateRoutes', userPermission).then(() => {
             //生成该用户的新路由json操作完毕之后,调用vue-router的动态新增路由方法,将新路由添加
-            console.log("store.getters");
-            console.log(store.getters);
             router.addRoutes(store.getters.addRouters)
           })
           resolve(data)
