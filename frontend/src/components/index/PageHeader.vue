@@ -101,8 +101,6 @@
             method: "post",
             data: this.user
           }).then(data => {
-            console.log("***********list*****************************");
-            console.log(this.$store.state.user);
             _this.menus = data;
           }).catch((err)=>{
             console.log("err");

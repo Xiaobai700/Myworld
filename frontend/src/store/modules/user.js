@@ -16,7 +16,6 @@ const user = {
   },
   mutations: {
     SET_USER: (state,userInfo) => {
-      alert(userInfo.username);
       state.username = userInfo.username;
       state.nickname = userInfo.nickname;
       state.userId = userInfo.userId;
@@ -58,8 +57,6 @@ const user = {
           method: 'post'
         }).then(data => {
           //储存用户信息
-          console.log("data.userPermission")
-          console.log(data.userPermission)
           commit('SET_USER', data.userPermission);
           //cookie保存登录状态,仅靠vuex保存的话,页面刷新就会丢失登录状态
           setToken();
