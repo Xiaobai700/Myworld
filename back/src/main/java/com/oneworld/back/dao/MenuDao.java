@@ -38,5 +38,7 @@ public interface MenuDao {
      * */
     int updateMenu(JSONObject jsonObject);
 
+    List<JSONObject> getUserPermission(JSONObject jsonObject);
+
 
 }

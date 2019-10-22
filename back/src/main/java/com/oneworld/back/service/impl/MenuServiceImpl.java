@@ -46,4 +46,14 @@ public class MenuServiceImpl implements MenuService {
         menuDao.updateMenu(jsonObject);
         return CommonUtil.successJson();
     }
+
+    @Override
+    public JSONObject getUserPermission(JSONObject jsonObject) {
+        JSONObject result = new JSONObject();
+        List<JSONObject> menus = menuDao.getUserPermission(jsonObject);
+        result.put("info",menus);
+        result.put("code",100);
+        result.put("msg","请求成功！");
+        return result;
+    }
 }

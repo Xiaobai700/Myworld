@@ -60,4 +60,19 @@
         where
         id = #{id}
     </update>
+
+    <select id="getUserPermission" parameterType="com.alibaba.fastjson.JSONObject" resultMap="menuMap">
+       select
+        menu_code menuCode,
+        menu_name menuName,
+        permission_code permissionCode,
+        permission_name permissionName,
+        delete_status deleteStatus
+        from
+        sys_permission
+        where delete_status = 1 and id in
+       (select permission_id from sys_role_permission where role_id =
+      (SELECT role_id from sys_user
+        where id = #{userId}))
+    </select>
 </mapper>

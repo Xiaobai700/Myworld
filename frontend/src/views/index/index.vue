@@ -1,7 +1,7 @@
 <template>
     <el-container>
       <el-header>
-        <page-header></page-header>
+        <page-header v-bind:username="username"></page-header>
       </el-header>
       <el-container>
         <el-aside width="200px">
@@ -35,6 +35,9 @@
       computed: {
         sidebar() {
           return this.$store.state.app.sidebar
+        },
+        username(){
+          return this.$store.state.user.nickname
         }
       }
     }

@@ -44,4 +44,10 @@ public class MenuController {
         CommonUtil.hasAllRequired(requestJson, "menuCode, menuName, permissionCode,permissionName");
         return menuService.updateMenu(requestJson);
     }
+
+   @PostMapping("/getMyPermission")
+    public JSONObject getPermissionByUerId(@RequestBody JSONObject requestJson){
+        CommonUtil.hasAllRequired(requestJson,"userId");
+        return menuService.getUserPermission(requestJson);
+    }
 }

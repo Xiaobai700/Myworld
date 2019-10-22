@@ -5,6 +5,7 @@
 
     <resultMap id="permissionMap" type="com.oneworld.back.utils.model.One2Many">
         <id column="userId" property="userId"/>
+        <result column="username" property="username"/>
         <result column="nickname" property="nickname"/>
         <result column="roleId" property="roleId"/>
         <result column="roleName" property="roleName"/>
@@ -18,6 +19,7 @@
     <select id="getUserPermission" resultMap="permissionMap">
         SELECT
             u.id              userId,
+            u.username        username,
             u.nickname        nickname,
             u.role_id         roleId,
             r.role_name       roleName,

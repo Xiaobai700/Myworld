@@ -82,7 +82,7 @@
           list:[],
           listQuery: {
             pageNum:1,
-            pageRow:20,
+            pageRow:20
           },
           roles: [],
           multipleSelection:'',

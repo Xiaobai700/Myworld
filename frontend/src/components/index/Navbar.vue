@@ -1,6 +1,13 @@
 <template>
   <el-menu class="navbar" mode="horizontal">
-    <breadcrumb></breadcrumb>
+    <div style="float: left;">
+      <breadcrumb></breadcrumb>
+    </div>
+    <div style="float: right;">
+      <el-badge :value="12">
+        <el-button size="small">消息</el-button>
+      </el-badge>
+    </div>
   </el-menu>
 </template>
 
@@ -9,6 +16,11 @@
   import Breadcrumb from '../index/Breadcrumb'
 
   export default {
+    data(){
+      return{
+        infoVisible:false
+      };
+    },
     components: {
       Breadcrumb
     },
@@ -28,7 +40,7 @@
     height: 38px;
     line-height: 38px;
     background-color: rgb(245,245,245);
-    float: left;
+    //float: left;
   }
 </style>
 

@@ -16,4 +16,6 @@ public interface MenuService {
 
     JSONObject updateMenu(JSONObject jsonObject);
 
+    JSONObject getUserPermission(JSONObject jsonObject);
+
 }

@@ -6,6 +6,7 @@ import router from '../../router/index'
 
 const user = {
   state: {
+    username:"",
     nickname: "",
     userId: "",
     avatar: 'https://www.gravatar.com/avatar/6560ed55e62396e40b34aac1e5041028',
@@ -15,6 +16,8 @@ const user = {
   },
   mutations: {
     SET_USER: (state,userInfo) => {
+      alert(userInfo.username);
+      state.username = userInfo.username;
       state.nickname = userInfo.nickname;
       state.userId = userInfo.userId;
       state.role = userInfo.roleName;
@@ -22,6 +25,7 @@ const user = {
       state.permissions = userInfo.permissionList;
     },
     RESET_USER: (state) => {
+      state.username = "",
       state.nickname = "";
       state.userId = "";
       state.role = '';
@@ -54,6 +58,8 @@ const user = {
           method: 'post'
         }).then(data => {
           //储存用户信息
+          console.log("data.userPermission")
+          console.log(data.userPermission)
           commit('SET_USER', data.userPermission);
           //cookie保存登录状态,仅靠vuex保存的话,页面刷新就会丢失登录状态
           setToken();
