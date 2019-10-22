@@ -21,9 +21,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * @author: hxy
  * @description: 文章相关Controller
- * @date: 2017/10/24 16:04
  */
 @RestController
 @RequestMapping("/article")

@@ -1,14 +1,9 @@
 <template>
   <div class="app-container">
-    <!--<div class="table">-->
     <div class="filter-container">
-      <el-form>
-        <el-form-item>
           <el-button type="danger" icon="el-icon-delete" @click="deleteArticles">批量删除</el-button>
           <el-button type="success" plain @click="exportExcel">批量导出</el-button>
           <el-button type="primary" plain @click="dialogVisible = true">批量导入</el-button>
-        </el-form-item>
-      </el-form>
     </div>
     <div>
       <el-dialog
@@ -50,6 +45,7 @@
       @cell-click="cellClick"
       tooltip-effect="dark"
       style="width: 100%"
+      height="90%"
       @selection-change="handleSelectionChange">
       <el-table-column
         type="selection"
@@ -251,10 +247,9 @@
           params: this.listQuery
         }).then(data => {
           this.list = data.list;
-          console.log("data.list");
-          console.log(data.list);
           this.totalCount = data.totalCount;
         })
+
       },
       handleSelectionChange(val) {
         this.multipleSelection = val;

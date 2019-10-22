@@ -57,7 +57,7 @@ export const asyncRouterMap = [
     component: Index,
     redirect: '/test/page3',
     meta:{title:'测试'},
-    name:'',
+    name:'测试模块',
     children: [
       {
         path: 'page3',
@@ -102,6 +102,36 @@ export const asyncRouterMap = [
         component: _import('menu/menu'),
         meta: {title: '菜单列表'},
         menu: 'menu'
+      }
+    ]
+  },
+  {
+    path: '/sys',
+    component:Index,
+    redirect:'/sys/message',
+    meta:{title:'系统管理'},
+    name:'系统管理',
+    children: [
+      {
+        path: 'message',
+        name: '消息列表',
+        component:_import('message/message'),
+        meta: {title:'消息列表'},
+        menu:'message'
+      },
+      {
+        path: 'log',
+        name: '日志列表',
+        component:_import('log/log'),
+        meta: {title:'日志列表'},
+        menu:'log'
+      },
+      {
+        path: 'errCode',
+        name: '错误码管理',
+        component:_import('errorCode/errorCode'),
+        meta: {title:'错误码管理'},
+        menu:'errorCode'
       }
     ]
   },
